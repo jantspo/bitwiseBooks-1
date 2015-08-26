@@ -1,0 +1,22 @@
+[
+  {
+    "_id": 1,
+    "genre": "Science Fiction"
+  },
+  {
+    "_id": 2,
+    "genre": "Fantasy"
+  },
+  {
+    "_id": 3,
+    "genre": "Fiction"
+  },
+  {
+    "_id": 4,
+    "genre": "Romance"
+  },
+  {
+    "_id": 5,
+    "genre": "Autobiography"
+  }
+]
