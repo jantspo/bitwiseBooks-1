@@ -1,20 +1,47 @@
 (function(){
     'use strict';
 
-    var app = angular.module('bitwiseBooks');
+    angular.module('bitwiseBooks')
+        .service('BooksService', function(Book, $http){
+            var vm = this;
 
-    app.service('BooksService', function(){
-        var books = [];
+            vm.books = [];
+            vm.genres = [];
 
-        function bootstrap(data){
-            data.forEach(function(book){
-               books.push(book);
-            });
-        }
+            vm.makeBooks = function makeBooks(data){
+                data.forEach(function(book){
+                    vm.books.push(new Book(book));
+                });
+                return vm.books;
+            };
 
-       return {
-           books: books,
-           bootstrap: bootstrap
-       }
-    });
+            vm.getGenres = function getGenres(){
+               return $http.get('../../genres.json').then(function(res){
+                   var data = res.data;
+                   data.forEach(function(genre){
+                       vm.genres.push(genre);
+                   });
+               }, function(err){
+                   return "Sorry, there was an error."
+               });
+
+            };
+
+            vm.getBooks = function getBooks(){
+                vm.books.splice(0);
+               return $http.get('../../books.json').then(function(res){
+                   return vm.makeBooks(res.data);
+               }, function(err){
+                   return "Sorry, there was an error."
+               });
+            };
+
+            vm.find = function find(bookId){
+                return _.find(vm.books, {_id: bookId});
+            };
+
+            vm.findGenre = function findGenre(genreId){
+                return _.find(vm.genres, {_id: genreId});
+            }
+        });
 }());
