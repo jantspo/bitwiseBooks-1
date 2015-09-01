@@ -8,7 +8,7 @@
             vm.books = [];
             vm.genres = [];
 
-            vm.makeBooks = function(data){
+            vm.makeBooks = function makeBooks(data){
                 data.forEach(function(book){
                     vm.books.push(new Book(book));
                 });
