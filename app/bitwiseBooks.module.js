@@ -61,6 +61,9 @@
                     },
                     authors: function(AuthorsService) {
                         return AuthorsService.getAuthors();
+                    },
+                    comments: function(CommentsService){
+                        return CommentsService.getComments();
                     }
                 }
             });
